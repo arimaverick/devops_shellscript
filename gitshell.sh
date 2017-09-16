@@ -1,14 +1,9 @@
 #!/bin/bash
-# merge
-git checkout -b branch001 origin/branch001
-git checkout master
-git merge -Xtheirs --squash branch001 -m "v${version}"
-
-# commit
-git commit -m "v${version}"
-
-# tag
-git tag v${version} -m "v${version}"
-
-# push
-git push origin v${version}
+cd ~
+git clone "$1"
+name=$(echo `basename "git@github.com:arimaverick/devops_shellscript.git"` | cut -f 1 -d '.')
+cd $name
+mv index.html index_jenkins.html
+git add .
+git commit -a -m "$2"
+git push
